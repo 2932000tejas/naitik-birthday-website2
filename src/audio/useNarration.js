@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 const base = import.meta.env.BASE_URL;
 const availability = new Map();
 const lines = {
+  'stage1-boot': ['stage1-boot.mp3', 'Mission control is waking up. Commander Naitik, your birthday mission is almost ready.'],
   'stage1-welcome': ['stage1-welcome.mp3', 'Commander Naitik, we have been waiting for you! Your special birthday mission is about to begin.'],
   'stage2-count-5': [null, 'Five.'], 'stage2-count-4': [null, 'Four.'],
   'stage2-count-3': [null, 'Three.'], 'stage2-count-2': [null, 'Two.'],
