@@ -6,7 +6,7 @@ const worlds = [
   { name: 'Pixel Planet', eyebrow: 'SECTOR 03 · THE DIGITAL REEF', title: 'The signal is a pattern', text: 'The blinking lights are speaking in a little sequence.', question: 'What comes next?  ✦  ●  ✦  ●  ?', answers: ['●', '✦', '▲'], correct: 1, art: 'pixel', hint: 'The star and dot take turns.' },
 ];
 const marathi = ['वाढदिवसाच्या खूप खूप शुभेच्छा, नैतिक! 🎂🚀', 'लाडक्या नैतिक, तुझं आयुष्य आनंदाने, मजेने आणि नवीन नवीन गोष्टी शिकण्याच्या उत्साहाने भरलेलं असो!', 'तू असाच हसत राहा, मोठी मोठी स्वप्नं बघ आणि तुझ्या स्वप्नांच्या दिशेने रॉकेटसारखी भरारी घे!', 'तुझ्या सहाव्या वाढदिवसाला खूप सारा आनंद, भरपूर प्रेम आणि गोड गोड आठवणी मिळोत!', 'हॅपी बर्थडे, आपल्या छोट्या सुपरस्टारला! ❤️', 'तुझं पुढचं साहस आता सुरू होतंय, कमांडर नैतिक!'];
-const ASSETS = { photos: ['/assets/naitik-photo-1.jpg', '/assets/naitik-photo-2.jpg'], voice: '/assets/voice-note.m4a', song: '/assets/birthday-song.mp3' };
+const ASSETS = { photos: ['/naitik-birthday-website2/assets/naitik-photo-1.jpg', '/naitik-birthday-website2/assets/naitik-photo-2.jpg'], voice: '/naitik-birthday-website2/assets/voice-note.m4a', song: '/naitik-birthday-website2/assets/birthday-song.mp3' };
 const stages = ['Mission Control Is Alive', 'Lift Off!', 'Welcome to Our World', 'Begin Your Mission!', 'Light Your Reward!'];
 
 function Stars() { return <div className="stars" aria-hidden="true">{Array.from({ length: 65 }, (_, i) => <i key={i} style={{ '--x': `${(i * 47 + 11) % 100}%`, '--y': `${(i * 71 + 4) % 100}%`, '--d': `${(i % 7) * -0.7}s`, '--s': `${1 + (i % 3)}px` }} />)}</div>; }
