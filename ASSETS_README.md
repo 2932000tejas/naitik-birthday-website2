@@ -19,7 +19,7 @@ Narration clip filenames:
 
 | Moment | File |
 | --- | --- |
-| Stage 1 welcome | `stage1-welcome.mp3` |
+| Stage 1 boot/loading cue and welcome | `stage1-boot.mp3`, `stage1-welcome.mp3` |
 | Stage 2 ignition, liftoff, atmosphere, arrival | `stage2-ignition.mp3`, `stage2-liftoff.mp3`, `stage2-atmosphere.mp3`, `stage2-arrival.mp3` |
 | Stage 3 signal, worlds, rocket-ready, hints | `stage3-signal.mp3`, `stage3-wonder-world.mp3`, `stage3-rocket-forge.mp3`, `stage3-pixel-planet.mp3`, `stage3-encouragement.mp3`, `stage3-rocket-ready.mp3`, `stage3-pattern-solved.mp3`, `stage3-hint.mp3` |
 | Stage 4 Asteroid Run | `stage4-asteroid-run.mp3`, `stage4-energy-star.mp3`, `stage4-asteroid-bump.mp3`, `stage4-gate.mp3` |
