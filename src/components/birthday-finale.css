@@ -34,5 +34,51 @@
 @keyframes bf-cake-rise{from{opacity:0;transform:translate(-50%,22px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}@keyframes bf-candle-ignite{0%{opacity:0;transform:rotate(45deg) scale(.3)}65%{opacity:1;transform:rotate(45deg) scale(1.2)}100%{opacity:1;transform:rotate(45deg) scale(1)}}@keyframes bf-photo-fade-in{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}@keyframes bf-photo-fade-out{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.985)}}@keyframes bf-surface-drift{to{background-position:140px -90px}}@keyframes bf-nebula-drift{to{transform:translate3d(32px,-20px,0) scale(1.12);opacity:.24}}@keyframes bf-shooting-star{0%,70%,100%{opacity:0;transform:translate3d(0,0,0) rotate(-28deg)}74%{opacity:.8}82%{opacity:0;transform:translate3d(130px,80px,0) rotate(-28deg)}}
 @media(max-width:760px){.bf-photo-frame{height:min(28vh,210px)}.bf-message-photo img{height:min(25vh,190px)}.bf-marathi-letter{font-size:14px}.bf-letter-label{font-size:8px!important}}
 @media(prefers-reduced-motion:reduce){.bf-arrival .bf-cake{opacity:1;transform:translateX(-50%)}.bf-awakening .bf-cake,.bf-hero .bf-cake{animation:none;opacity:1;transform:translateX(-50%)}.bf-awakening .bf-candle b{animation:none;opacity:1}.bf-awakening .bf-confetti{opacity:.2}.bf-photo-frame.photo-second .bf-photo-current,.bf-photo-frame.photo-second .bf-photo-previous{animation:none}.bf-photo-frame.photo-second .bf-photo-previous{display:none}.bf-planet:after,.bf-nebula,.bf-nebula:after{animation:none!important}}
+.bf-planet-scene{transform:scale(1);transition:filter 1.5s,transform 2.2s cubic-bezier(.2,.7,.2,1),opacity 1.5s}
+.bf-arrival .bf-planet-scene{transform:scale(.78);opacity:.72}
+.bf-awakening .bf-planet-scene{transform:scale(1.03);opacity:1}
+.bf-light-cone{position:absolute;z-index:0;inset:-18%;pointer-events:none;opacity:0;filter:blur(9px);background:conic-gradient(from 195deg at 50% 52%,transparent 0deg,#ffe59c10 18deg,transparent 35deg,#8ceafa12 67deg,transparent 92deg,#ffe59c0d 122deg,transparent 155deg);transition:opacity 1.4s ease;animation:bf-light-turn 32s linear infinite}
+.bf-awakening .bf-light-cone,.bf-hero .bf-light-cone,.bf-voice .bf-light-cone,.bf-photo-one .bf-light-cone,.bf-photo-two .bf-light-cone,.bf-message .bf-light-cone,.bf-celebration .bf-light-cone{opacity:.9}
+.bf-celestial-dust{position:absolute;z-index:1;inset:0;pointer-events:none;overflow:visible}
+.bf-celestial-dust i{position:absolute;left:var(--x);top:var(--y);width:3px;height:3px;border-radius:50%;background:#e9fbff;box-shadow:0 0 9px 2px #7ee8f777;opacity:.22;animation:bf-dust-float 5s ease-in-out var(--delay) infinite alternate}
+.bf-celestial-dust i:nth-child(3n){width:5px;height:5px;background:#ffe9ad;box-shadow:0 0 13px 3px #ffc65d77}
+.bf-planet-ring{animation:bf-ring-turn 42s linear infinite}
+.bf-awakening .bf-planet-ring{animation-duration:18s;filter:drop-shadow(0 0 8px #ffe8a5)}
+.bf-hero .bf-planet-ring,.bf-voice .bf-planet-ring,.bf-photo-one .bf-planet-ring,.bf-photo-two .bf-planet-ring,.bf-message .bf-planet-ring,.bf-celebration .bf-planet-ring{animation-duration:36s}
+.bf-cake-stand{position:relative;width:108%;height:10px;flex:none;margin-top:-1px;border-radius:50%;background:linear-gradient(180deg,#fff3e6,#c78fae 62%,#81557d);border:1px solid #fff2df;box-shadow:0 5px 12px #2b193f99,0 0 14px #ffd88b55}
+.bf-cake-stand:after{content:"";position:absolute;left:17%;right:17%;top:4px;height:8px;border-radius:50%;background:linear-gradient(90deg,#a76b98,#f3c9bb 50%,#a76b98);opacity:.8}
+.bf-cake-layer{position:relative;overflow:hidden;border:1px solid #ffe8dc;box-shadow:inset 0 4px 7px #fff9e388,inset 0 -8px #a8558470,0 5px 10px #42244870}
+.bf-cake-layer:before{content:"";position:absolute;inset:0 9% auto;height:5px;border-radius:0 0 50% 50%;background:#fff7e7aa;filter:blur(1px)}
+.layer-top:after{content:"";position:absolute;left:18%;right:18%;top:38%;height:4px;background:radial-gradient(circle,#ffeaa8 0 2px,transparent 2.5px) 0 0/18px 4px repeat-x;opacity:.85}
+.bf-awakening .bf-cake-stand{animation:bf-stand-glow 1.5s ease-in-out infinite alternate}
+.bf-awakening .bf-candle-row:after{content:"";position:absolute;z-index:-1;left:20%;right:20%;bottom:-14px;height:34px;border-radius:50%;background:#ffd66b66;filter:blur(15px);animation:bf-candle-aura 1.1s ease-in-out infinite alternate}
+.bf-celebration .bf-candle b{animation-duration:1.2s;filter:drop-shadow(0 0 9px #ffda75)}
+.bf-celebration .bf-planet{box-shadow:inset -38px -21px 44px #1b214e91,inset 10px 7px 22px #fff0c27a,0 0 92px #ffc66bb0,0 0 190px #57dcf56a}
+.bf-celebration .bf-light-cone{opacity:1;animation-duration:22s}
+.bf-celebration .bf-celestial-dust i{opacity:.65}
+.bf-celebration .bf-confetti{opacity:.6}
+@keyframes bf-light-turn{to{transform:rotate(360deg)}}@keyframes bf-ring-turn{to{transform:rotate(703deg)}}@keyframes bf-dust-float{to{transform:translate3d(var(--drift),-18px,0) scale(1.6);opacity:.85}}@keyframes bf-stand-glow{to{box-shadow:0 5px 12px #2b193f99,0 0 28px #ffd88bcc}}@keyframes bf-candle-aura{to{opacity:.5;transform:scale(1.18)}}
+@media(prefers-reduced-motion:reduce){.bf-arrival .bf-planet-scene,.bf-awakening .bf-planet-scene{transform:none;opacity:1}.bf-light-cone,.bf-celestial-dust i,.bf-planet-ring,.bf-awakening .bf-cake-stand,.bf-awakening .bf-candle-row:after{animation:none!important}.bf-awakening .bf-candle-row:after{opacity:.5}}
+.bf-fireworks,.bf-balloons{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1s ease}
+.bf-awakening .bf-fireworks,.bf-hero .bf-fireworks,.bf-celebration .bf-fireworks{opacity:.82}
+.bf-voice .bf-fireworks,.bf-photo-one .bf-fireworks,.bf-photo-two .bf-fireworks,.bf-message .bf-fireworks{opacity:.2}
+.bf-awakening .bf-balloons,.bf-hero .bf-balloons,.bf-photo-one .bf-balloons,.bf-photo-two .bf-balloons,.bf-message .bf-balloons,.bf-celebration .bf-balloons{opacity:.82}
+.bf-fireworks i{position:absolute;left:var(--firework-x);top:var(--firework-y);width:4px;height:4px;border-radius:50%;background:#fff5cc;box-shadow:0 -24px #ffe18a,17px -17px #ffe18a,24px 0 #79e7f5,17px 17px #79e7f5,0 24px #f5a8d7,-17px 17px #f5a8d7,-24px 0 #ffe18a,-17px -17px #ffe18a;opacity:0;animation:bf-firework-pop 5.8s ease-out var(--firework-delay) infinite}
+.bf-fireworks i:before{content:"";position:absolute;inset:-9px;border:1px solid #ffe6a9;border-radius:50%;animation:bf-firework-ring 5.8s ease-out var(--firework-delay) infinite}
+.bf-fireworks i:nth-child(1){--firework-x:18%;--firework-y:22%;--firework-delay:0s}
+.bf-fireworks i:nth-child(2){--firework-x:82%;--firework-y:29%;--firework-delay:1.45s;filter:hue-rotate(85deg)}
+.bf-fireworks i:nth-child(3){--firework-x:12%;--firework-y:67%;--firework-delay:2.9s;filter:hue-rotate(220deg)}
+.bf-fireworks i:nth-child(4){--firework-x:89%;--firework-y:63%;--firework-delay:4.35s;filter:hue-rotate(135deg)}
+.bf-balloons i{position:absolute;left:var(--balloon-x);bottom:-72px;width:clamp(25px,3.6vw,43px);height:clamp(34px,4.8vw,56px);border-radius:52% 48% 47% 53% / 43% 43% 57% 57%;background:radial-gradient(circle at 30% 25%,#fff9,transparent 17%),radial-gradient(ellipse at 36% 26%,#ffb8c7,#e9649d 60%,#9d4788);box-shadow:inset -6px -8px 10px #50296455,0 0 18px #ed78be55;opacity:0;animation:bf-balloon-lift var(--balloon-duration) ease-in var(--balloon-delay) infinite}
+.bf-balloons i:before{content:"";position:absolute;left:calc(50% - 3px);bottom:-4px;width:6px;height:7px;background:inherit;clip-path:polygon(0 0,100% 0,50% 100%)}
+.bf-balloons i:after{content:"";position:absolute;left:50%;top:100%;width:1px;height:62px;background:linear-gradient(#f8e6ff88,transparent);transform-origin:top;animation:bf-string-sway 2.4s ease-in-out infinite alternate}
+.bf-balloons i:nth-child(1){--balloon-x:4%;--balloon-delay:0s;--balloon-duration:18s}
+.bf-balloons i:nth-child(2){--balloon-x:17%;--balloon-delay:6s;--balloon-duration:22s;background:radial-gradient(circle at 30% 25%,#fff9,transparent 17%),radial-gradient(ellipse at 36% 26%,#a7f5ef,#42a9d2 62%,#4961a9)}
+.bf-balloons i:nth-child(3){--balloon-x:80%;--balloon-delay:3s;--balloon-duration:20s;background:radial-gradient(circle at 30% 25%,#fff9,transparent 17%),radial-gradient(ellipse at 36% 26%,#ffe6a1,#ff9a5f 62%,#cd5c81)}
+.bf-balloons i:nth-child(4){--balloon-x:94%;--balloon-delay:9s;--balloon-duration:23s;background:radial-gradient(circle at 30% 25%,#fff9,transparent 17%),radial-gradient(ellipse at 36% 26%,#d6c7ff,#8b73d9 62%,#624caa)}
+.bf-celebration .bf-fireworks{opacity:.9}.bf-celebration .bf-balloons{opacity:1}
+@keyframes bf-firework-pop{0%,12%{opacity:0;transform:scale(.15)}18%{opacity:.9;transform:scale(.7)}32%{opacity:.65;transform:scale(1)}48%,100%{opacity:0;transform:scale(1.28)}}@keyframes bf-firework-ring{0%,14%{opacity:0;transform:scale(.15)}22%{opacity:.55}46%,100%{opacity:0;transform:scale(2.8)}}@keyframes bf-balloon-lift{0%{opacity:0;transform:translate3d(0,0,0) rotate(-7deg)}9%{opacity:.82}48%{transform:translate3d(10px,-52vh,0) rotate(6deg)}90%{opacity:.8}100%{opacity:0;transform:translate3d(-8px,-115vh,0) rotate(-6deg)}}@keyframes bf-string-sway{to{transform:rotate(7deg)}}
+@media(max-width:760px){.bf-fireworks i{transform:scale(.75)}.bf-balloons i:nth-child(2),.bf-balloons i:nth-child(3){opacity:.64}}
+@media(prefers-reduced-motion:reduce){.bf-fireworks i,.bf-fireworks i:before,.bf-balloons i,.bf-balloons i:after{animation:none!important}.bf-awakening .bf-fireworks,.bf-hero .bf-fireworks,.bf-celebration .bf-fireworks{opacity:.22}.bf-awakening .bf-balloons,.bf-hero .bf-balloons,.bf-celebration .bf-balloons{opacity:.36}.bf-balloons i{opacity:.6;bottom:12px}}
 .stage-4{overflow-x:hidden;overflow-y:auto}.birthday-finale audio{display:none}.bf-confetti i{left:var(--x);animation-duration:var(--duration);animation-delay:var(--delay)}.bf-voice-arrival{min-height:80px;display:grid;place-items:center;align-content:center;text-align:center;color:#e1eaf8}.bf-voice-arrival p{font-size:13px;margin:4px 0}
 .bf-portal-glow{position:fixed;z-index:8;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 52%,#fffbe9 0%,#ffe8aeef 16%,#a4f3f7df 40%,#7667b5a6 68%,#080c21 100%);opacity:.96;animation:bf-portal-fade 1.65s cubic-bezier(.25,.65,.4,1) forwards}@keyframes bf-portal-fade{to{opacity:0;visibility:hidden}}

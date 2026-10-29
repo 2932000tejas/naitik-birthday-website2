@@ -15,9 +15,11 @@ const message = [
 
 function BirthdayPlanet({ phase }) {
   return <div className={`bf-planet-scene ${phase === 'arrival' ? 'is-dim' : 'is-awake'}`} aria-label="A glowing birthday planet with a cake and six candles">
+    <div className="bf-light-cone" aria-hidden="true"/>
     <div className="bf-orbit bf-orbit-one"><i/><i/></div><div className="bf-orbit bf-orbit-two"><i/></div>
+    <div className="bf-celestial-dust" aria-hidden="true">{Array.from({ length: 10 }, (_, i) => <i key={i} style={{ '--x': `${(i * 37 + 9) % 100}%`, '--y': `${(i * 53 + 13) % 100}%`, '--delay': `${(i % 5) * -1.1}s`, '--drift': `${(i % 2 ? 1 : -1) * (12 + i % 4 * 5)}px` }}/>)}</div>
     <div className="bf-planet"><span className="bf-crater crater-one"/><span className="bf-crater crater-two"/><span className="bf-planet-ring"/>
-      <div className="bf-cake"><div className="bf-candle-row">{Array.from({ length: 6 }, (_, i) => <i className="bf-candle" key={i}><b/></i>)}</div><div className="bf-cake-icing"/><div className="bf-cake-layer layer-top"/><div className="bf-cake-layer layer-bottom"/><div className="bf-cake-stars">✦　✦　✦</div></div>
+      <div className="bf-cake"><div className="bf-candle-row">{Array.from({ length: 6 }, (_, i) => <i className="bf-candle" key={i}><b/></i>)}</div><div className="bf-cake-icing"/><div className="bf-cake-layer layer-top"/><div className="bf-cake-layer layer-bottom"/><div className="bf-cake-stand"/><div className="bf-cake-stars">✦　✦　✦</div></div>
       <span className="bf-planet-caption">HAPPY BIRTHDAY, COMMANDER</span>
     </div><i className="bf-small-moon"/>
   </div>;
@@ -167,7 +169,7 @@ export default function BirthdayFinale({ muted, onNarration }) {
 
   return <section className={`scene birthday-finale bf-${phase}${reducedMotion ? ' bf-reduced-motion' : ''}`} aria-labelledby="bf-title">
     <div className="bf-portal-glow" aria-hidden="true"/>
-    <div className="bf-backdrop" aria-hidden="true"><i className="bf-nebula nebula-a"/><i className="bf-nebula nebula-b"/><div className="bf-confetti">{Array.from({ length: 20 }, (_, i) => <i key={i} style={{ '--x': `${(i * 43 + 7) % 100}%`, '--delay': `${i * -0.6}s`, '--duration': `${5 + (i % 5)}s` }}/>)}</div></div>
+    <div className="bf-backdrop" aria-hidden="true"><i className="bf-nebula nebula-a"/><i className="bf-nebula nebula-b"/><div className="bf-confetti">{Array.from({ length: 20 }, (_, i) => <i key={i} style={{ '--x': `${(i * 43 + 7) % 100}%`, '--delay': `${i * -0.6}s`, '--duration': `${5 + (i % 5)}s` }}/>)}</div><div className="bf-fireworks"><i/><i/><i/><i/></div><div className="bf-balloons"><i/><i/><i/><i/></div></div>
     <audio ref={voiceRef} src={asset('voice-note.m4a')} preload="none" muted={muted}/>
     <audio ref={songRef} src={asset('birthday-song.mp3')} preload="none" loop muted={muted} onError={() => setMusicState('missing')} onPlay={() => setMusicState('playing')}/>
     <p className="bf-arrival-label" aria-live="polite">{phase === 'arrival' || phase === 'awakening' ? 'DESTINATION REACHED' : phase === 'celebration' ? 'MISSION COMPLETE · SIGNAL DECODED' : 'A BIRTHDAY GALAXY, MADE FOR YOU'}</p>
