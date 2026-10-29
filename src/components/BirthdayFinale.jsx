@@ -3,6 +3,7 @@ import './birthday-finale.css';
 
 const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
 const photos = ['naitik-photo-1.jpg', 'naitik-photo-2.jpg'];
+const PHOTO_HOLD_MS = 5200;
 const message = [
   'वाढदिवसाच्या खूप खूप शुभेच्छा, नैतिक! 🎂🚀',
   'लाडक्या नैतिक, तुझं आयुष्य आनंदाने, मजेने आणि नवीन नवीन गोष्टी शिकण्याच्या उत्साहाने भरलेलं असो!',
@@ -26,6 +27,7 @@ export default function BirthdayFinale({ muted, onNarration }) {
   const [phase, setPhase] = useState('arrival');
   const [photoIndex, setPhotoIndex] = useState(0);
   const [photoAvailable, setPhotoAvailable] = useState([true, true]);
+  const [photoRatios, setPhotoRatios] = useState([4 / 3, 4 / 3]);
   const [voiceState, setVoiceState] = useState('waiting');
   const [musicState, setMusicState] = useState('waiting');
   const [paragraphs, setParagraphs] = useState(0);
@@ -57,7 +59,7 @@ export default function BirthdayFinale({ muted, onNarration }) {
   useEffect(() => {
     if (phase !== 'awakening') return undefined;
     const id = runId.current;
-    const timer = window.setTimeout(() => { if (runId.current === id) setPhase('hero'); }, 2100 * timeScale);
+    const timer = window.setTimeout(() => { if (runId.current === id) setPhase('hero'); }, 3000 * timeScale);
     return () => window.clearTimeout(timer);
   }, [phase, timeScale]);
 
@@ -85,9 +87,14 @@ export default function BirthdayFinale({ muted, onNarration }) {
     const id = runId.current;
     const timer = window.setTimeout(() => {
       if (runId.current !== id) return;
-      if (phase === 'photo-one') { setPhotoIndex(1); setPhase('photo-two'); }
+      if (phase === 'photo-one') {
+        const nextPhoto = new Image();
+        nextPhoto.onload = () => { if (runId.current === id) { setPhotoIndex(1); setPhase('photo-two'); } };
+        nextPhoto.onerror = () => { if (runId.current === id) { setPhotoAvailable(current => current.map((value, i) => i === 1 ? false : value)); enterMessage(); } };
+        nextPhoto.src = asset(photos[1]);
+      }
       else enterMessage();
-    }, 5000 * timeScale);
+    }, PHOTO_HOLD_MS * timeScale);
     return () => window.clearTimeout(timer);
   }, [phase, photoAvailable, photoIndex, timeScale]);
 
@@ -169,19 +176,20 @@ export default function BirthdayFinale({ muted, onNarration }) {
     </header></div>
     <div className="bf-story-area">
       {(phase === 'arrival' || phase === 'awakening' || phase === 'hero') && <p className="bf-story-status" aria-live="polite">{phase === 'arrival' ? 'Your rocket has arrived at a very special planet…' : phase === 'awakening' ? 'Look! The birthday planet is waking up!' : 'Six candles, shining just for you.'}</p>}
-      {phase === 'voice' && <div className="bf-voice-arrival" aria-live="polite"><span className={`bf-sound-wave ${voiceState === 'playing' ? 'is-speaking' : ''}`} aria-hidden="true"><i/><i/><i/><i/><i/></span><p>{voiceState === 'playing' ? 'A special message, just for you…' : 'Your family has a message for you.'}</p></div>}
+      {phase === 'voice' && <div className="bf-voice-arrival" aria-live="polite"><span className={`bf-sound-wave ${voiceState === 'playing' ? 'is-speaking' : ''}`} aria-hidden="true"><i/><i/><i/><i/><i/></span><p>{voiceState === 'playing' ? 'A special message, just for you…' : 'Your friends have a message for you.'}</p></div>}
       {(phase === 'photo-one' || phase === 'photo-two') && <div className="bf-personal-reveal">
-        <div className={`bf-photo-frame photo-in ${phase === 'photo-two' ? 'photo-second' : ''}`}>
-          {photoAvailable[photoIndex] && <img src={asset(photos[photoIndex])} alt={`Naitik, birthday memory ${photoIndex + 1}`} onError={() => setPhotoAvailable(current => current.map((value, i) => i === photoIndex ? false : value))}/>}
+        <div className={`bf-photo-frame photo-in ${phase === 'photo-two' ? 'photo-second' : ''}`} style={{ '--photo-ratio': photoRatios[photoIndex] }}>
+          {phase === 'photo-two' && photoAvailable[0] && <img className="bf-photo-previous" src={asset(photos[0])} alt="" aria-hidden="true"/>}
+          {photoAvailable[photoIndex] && <img className="bf-photo-current" src={asset(photos[photoIndex])} alt={`Naitik, birthday memory ${photoIndex + 1}`} onLoad={event => { const image = event.currentTarget; if (image.naturalWidth && image.naturalHeight) setPhotoRatios(current => current.map((ratio, i) => i === photoIndex ? image.naturalWidth / image.naturalHeight : ratio)); }} onError={() => setPhotoAvailable(current => current.map((value, i) => i === photoIndex ? false : value))}/>}
           {!photoAvailable[photoIndex] && <div className="bf-photo-placeholder"><span>✦</span><b>YOUR PHOTO GOES HERE</b><small>Replace {photos[photoIndex]} in public/assets</small></div>}
         </div>
-        <div className="bf-voice-copy" aria-live="polite"><span className={`bf-sound-wave ${voiceState === 'playing' ? 'is-speaking' : ''}`} aria-hidden="true"><i/><i/><i/><i/><i/></span><p>{voiceState === 'blocked' ? 'Your voice message is ready when you are.' : voiceState === 'missing' ? 'The personal voice message is not available yet.' : 'A little birthday memory from your family.'}</p>
+        <div className="bf-voice-copy" aria-live="polite"><span className={`bf-sound-wave ${voiceState === 'playing' ? 'is-speaking' : ''}`} aria-hidden="true"><i/><i/><i/><i/><i/></span><p>{voiceState === 'blocked' ? 'Your voice message is ready when you are.' : voiceState === 'missing' ? 'The personal voice message is not available yet.' : 'A little birthday memory from your friends.'}</p>
           {voiceState === 'blocked' && <button type="button" className="bf-small-button" onClick={beginVoice}>▶ PLAY VOICE MESSAGE</button>}
         </div>
       </div>}
       {(phase === 'message' || phase === 'celebration') && <div className="bf-message-layout">
-        <div className="bf-message-photo">{messagePhotoIndex >= 0 ? <img src={asset(photos[messagePhotoIndex])} alt={`Naitik, birthday memory ${messagePhotoIndex + 1}`} onError={() => setPhotoAvailable(current => current.map((value, i) => i === messagePhotoIndex ? false : value))}/> : <div className="bf-photo-placeholder"><span>✦</span><b>YOUR PHOTOS GO HERE</b><small>Add Naitik's photos to public/assets</small></div>}</div>
-        <article className="bf-marathi-letter" lang="mr"><p className="bf-letter-label">A LETTER FROM YOUR FAMILY · ✦</p>{message.map((line, index) => <p key={line} className={index < paragraphs || phase === 'celebration' ? 'paragraph-visible' : 'paragraph-hidden'}>{line}</p>)}</article>
+        <div className="bf-message-photo">{messagePhotoIndex >= 0 ? <img style={{ '--photo-ratio': photoRatios[messagePhotoIndex] }} src={asset(photos[messagePhotoIndex])} alt={`Naitik, birthday memory ${messagePhotoIndex + 1}`} onLoad={event => { const image = event.currentTarget; if (image.naturalWidth && image.naturalHeight) setPhotoRatios(current => current.map((ratio, i) => i === messagePhotoIndex ? image.naturalWidth / image.naturalHeight : ratio)); }} onError={() => setPhotoAvailable(current => current.map((value, i) => i === messagePhotoIndex ? false : value))}/> : <div className="bf-photo-placeholder"><span>✦</span><b>YOUR PHOTOS GO HERE</b><small>Add Naitik's photos to public/assets</small></div>}</div>
+        <article className="bf-marathi-letter" lang="mr"><p className="bf-letter-label">A BIRTHDAY SURPRISE FROM YOUR FRIENDS · ✦</p>{message.map((line, index) => <p key={line} className={index < paragraphs || phase === 'celebration' ? 'paragraph-visible' : 'paragraph-hidden'}>{line}</p>)}</article>
       </div>}
       {phase === 'message' && <div className="bf-message-actions"><p>Take your time, Commander. This message is for you.</p></div>}
       {phase === 'celebration' && <div className="bf-celebration-controls"><p className="bf-song-state" aria-live="polite">{musicState === 'playing' ? '♪ Birthday music is playing on repeat' : musicState === 'ready' ? 'Your birthday song is ready.' : musicState === 'missing' ? 'Birthday music can be added when you’re ready.' : 'The celebration is ready!'}</p>{musicState === 'ready' && <button type="button" className="bf-small-button" onClick={enterCelebration}>▶ PLAY BIRTHDAY MUSIC</button>}<button type="button" className="bf-replay-button" onClick={replayCelebration}>↺ &nbsp; REPLAY CELEBRATION</button></div>}

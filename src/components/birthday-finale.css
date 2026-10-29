@@ -6,5 +6,33 @@
 @media(max-width:430px){.birthday-finale{gap:6px}.bf-arrival-label{font-size:7px}.bf-planet-scene{height:210px}.bf-planet{width:173px}.bf-candle{width:6px;height:22px}.bf-candle-row{gap:4px}.bf-hero-title h1{font-size:clamp(28px,8vw,36px)}.bf-level{font-size:8px}.bf-story-status{font-size:11px}.bf-personal-reveal{grid-template-columns:1fr;gap:6px;width:min(330px,100%)}.bf-photo-frame{width:100%;max-height:165px;min-height:105px}.bf-voice-copy{text-align:center;font-size:11px}.bf-voice-copy p{margin:3px 0}.bf-small-button{min-height:40px;margin:4px}.bf-message-photo{min-height:75px;max-height:95px}.bf-message-photo img{max-height:90px}.bf-marathi-letter{font-size:12px;line-height:1.52;padding:9px 11px}.bf-marathi-letter p{margin-bottom:5px}.bf-message-actions>p{font-size:9px}.bf-celebrate-button{min-height:42px}}
 .bf-planet-caption{display:none}@media(min-width:761px){.bf-planet-caption{display:block}.bf-hero-title{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.bf-backdrop:before,.bf-backdrop:after,.bf-planet,.bf-orbit,.bf-candle b,.bf-confetti i,.bf-sound-wave i{animation:none!important}.bf-confetti{opacity:.45}.bf-planet-scene.is-dim{filter:brightness(.7)}}
+.bf-confetti{transition:opacity .8s ease}
+.bf-awakening .bf-cake{animation:bf-cake-rise .9s cubic-bezier(.2,.75,.25,1) both}
+.bf-arrival .bf-cake{opacity:0;transform:translate(-50%,22px) scale(.9)}
+.bf-awakening .bf-confetti,.bf-hero .bf-confetti{opacity:.72}
+.bf-hero .bf-confetti,.bf-voice .bf-confetti,.bf-photo-one .bf-confetti,.bf-photo-two .bf-confetti,.bf-message .bf-confetti{opacity:.08}
+.bf-awakening .bf-candle b{opacity:0;animation:bf-candle-ignite .42s ease-out forwards,bf-flame 1s ease-in-out .42s infinite alternate}
+.bf-awakening .bf-candle:nth-child(1) b{animation-delay:.18s,.6s}.bf-awakening .bf-candle:nth-child(2) b{animation-delay:.48s,.9s}.bf-awakening .bf-candle:nth-child(3) b{animation-delay:.78s,1.2s}.bf-awakening .bf-candle:nth-child(4) b{animation-delay:1.08s,1.5s}.bf-awakening .bf-candle:nth-child(5) b{animation-delay:1.38s,1.8s}.bf-awakening .bf-candle:nth-child(6) b{animation-delay:1.68s,2.1s}
+.bf-hero .bf-candle b,.bf-voice .bf-candle b,.bf-photo-one .bf-candle b,.bf-photo-two .bf-candle b,.bf-message .bf-candle b,.bf-celebration .bf-candle b{opacity:1}
+.bf-hero .bf-planet{filter:brightness(1.08) saturate(1.08)}
+.bf-planet:after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:1;opacity:.34;background:repeating-linear-gradient(156deg,transparent 0 22px,#fff7e514 24px,transparent 27px 54px);mix-blend-mode:screen;animation:bf-surface-drift 52s linear infinite}
+.bf-nebula{animation:bf-nebula-drift 25s ease-in-out infinite alternate}
+.nebula-b{animation-duration:33s}
+.bf-nebula:after{content:"";position:absolute;left:12%;top:20%;width:62px;height:1px;background:linear-gradient(90deg,transparent,#dffaff,#fff1ca,transparent);opacity:0;transform:rotate(-28deg);filter:drop-shadow(0 0 5px #8be9ff);animation:bf-shooting-star 10s ease-in-out 1.8s infinite}
+.bf-cake{width:66%;top:14%;filter:drop-shadow(0 10px 12px #542b587a) drop-shadow(0 0 20px #ffd66b35)}
+.bf-photo-frame{width:auto;height:min(34vh,270px);min-height:0;max-height:none;aspect-ratio:var(--photo-ratio,1.333);justify-self:center;}
+.bf-photo-frame img{object-fit:contain}
+.bf-photo-frame{position:relative}
+.bf-photo-frame .bf-photo-current,.bf-photo-frame .bf-photo-previous{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;}
+.bf-photo-frame.photo-second .bf-photo-current{animation:bf-photo-fade-in .9s ease both}
+.bf-photo-frame.photo-second .bf-photo-previous{animation:bf-photo-fade-out .9s ease both}
+.bf-message-photo img{width:auto;height:min(32vh,250px);max-height:none;max-width:100%;aspect-ratio:var(--photo-ratio,1.333);object-fit:contain;padding:5px;border:1px solid #ffd66b68;border-radius:10px;background:#111832;box-shadow:0 0 20px #55ddf52a;animation:bf-text-in .6s ease both}
+.bf-message-photo{min-height:0;max-height:none;height:auto;overflow:visible}
+.bf-message-photo img:first-child:nth-last-child(1){width:auto;height:min(36vh,270px);max-width:100%;object-fit:contain}
+.bf-marathi-letter{font-size:clamp(14px,1.2vw,17px)}.bf-letter-label{font-size:9px!important;line-height:1.4}
+.bf-awakening .bf-hero-title{filter:drop-shadow(0 0 20px #ffe49a45)}
+@keyframes bf-cake-rise{from{opacity:0;transform:translate(-50%,22px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}@keyframes bf-candle-ignite{0%{opacity:0;transform:rotate(45deg) scale(.3)}65%{opacity:1;transform:rotate(45deg) scale(1.2)}100%{opacity:1;transform:rotate(45deg) scale(1)}}@keyframes bf-photo-fade-in{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}@keyframes bf-photo-fade-out{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.985)}}@keyframes bf-surface-drift{to{background-position:140px -90px}}@keyframes bf-nebula-drift{to{transform:translate3d(32px,-20px,0) scale(1.12);opacity:.24}}@keyframes bf-shooting-star{0%,70%,100%{opacity:0;transform:translate3d(0,0,0) rotate(-28deg)}74%{opacity:.8}82%{opacity:0;transform:translate3d(130px,80px,0) rotate(-28deg)}}
+@media(max-width:760px){.bf-photo-frame{height:min(28vh,210px)}.bf-message-photo img{height:min(25vh,190px)}.bf-marathi-letter{font-size:14px}.bf-letter-label{font-size:8px!important}}
+@media(prefers-reduced-motion:reduce){.bf-arrival .bf-cake{opacity:1;transform:translateX(-50%)}.bf-awakening .bf-cake,.bf-hero .bf-cake{animation:none;opacity:1;transform:translateX(-50%)}.bf-awakening .bf-candle b{animation:none;opacity:1}.bf-awakening .bf-confetti{opacity:.2}.bf-photo-frame.photo-second .bf-photo-current,.bf-photo-frame.photo-second .bf-photo-previous{animation:none}.bf-photo-frame.photo-second .bf-photo-previous{display:none}.bf-planet:after,.bf-nebula,.bf-nebula:after{animation:none!important}}
 .stage-4{overflow-x:hidden;overflow-y:auto}.birthday-finale audio{display:none}.bf-confetti i{left:var(--x);animation-duration:var(--duration);animation-delay:var(--delay)}.bf-voice-arrival{min-height:80px;display:grid;place-items:center;align-content:center;text-align:center;color:#e1eaf8}.bf-voice-arrival p{font-size:13px;margin:4px 0}
 .bf-portal-glow{position:fixed;z-index:8;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 52%,#fffbe9 0%,#ffe8aeef 16%,#a4f3f7df 40%,#7667b5a6 68%,#080c21 100%);opacity:.96;animation:bf-portal-fade 1.65s cubic-bezier(.25,.65,.4,1) forwards}@keyframes bf-portal-fade{to{opacity:0;visibility:hidden}}

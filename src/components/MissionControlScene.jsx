@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import './mission-control.css';
 
 const bootLines = [
-  'NAITIK-006 MISSION SYSTEM',
-  'POWERING UP…',
-  'LIFE SUPPORT: ONLINE',
-  'NAVIGATION SYSTEM: ONLINE',
-  'STAR MAP: SYNCHRONIZING',
+  'ESTABLISHING DEEP SPACE LINK…',
+  'COMMANDER IDENTIFIED: NAITIK',
+  'INCOMING TRANSMISSION',
+  'MISSION SYSTEMS READY',
 ];
 
 export function RocketIllustration() {
@@ -56,7 +55,7 @@ export default function MissionControlScene({ onInitialize, onLaunch }) {
       setPhase('ready');
       return undefined;
     }
-    timerRef.current = window.setTimeout(() => setPhase('ready'), 6600);
+    timerRef.current = window.setTimeout(() => setPhase('ready'), 4400);
     return () => window.clearTimeout(timerRef.current);
   }, []);
 
