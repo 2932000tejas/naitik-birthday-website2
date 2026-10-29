@@ -42,7 +42,7 @@ export function RocketIllustration() {
   </svg>;
 }
 
-export default function MissionControlScene({ onInitialize, onLaunch }) {
+export default function MissionControlScene({ onInitialize, onLaunch, onNarration }) {
   const [phase, setPhase] = useState('booting');
   const timerRef = useRef(null);
   const launchFallbackRef = useRef(null);
@@ -60,6 +60,13 @@ export default function MissionControlScene({ onInitialize, onLaunch }) {
   }, []);
 
   useEffect(() => () => { window.clearTimeout(timerRef.current); window.clearTimeout(launchFallbackRef.current); }, []);
+
+  useEffect(() => {
+    const narrationTimer = window.setTimeout(() => {
+      if (!launchLock.current) onNarration?.('stage1-boot');
+    }, 480);
+    return () => window.clearTimeout(narrationTimer);
+  }, [onNarration]);
 
   const initialize = () => {
     if (phase !== 'ready' || launchLock.current) return;
